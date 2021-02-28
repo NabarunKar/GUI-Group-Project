@@ -12,7 +12,7 @@ class Register:
             self.bg=ImageTk.PhotoImage(file="images\stcet.png")#this bg is object of class
             bg=Label(self.root,image=self.bg).place(x=250,y=0,relwidth=1,relheight=1)#this bg is object of root window
 
-            # LEFT IMAGE COLLEGE LOGO #
+            # LEFT IMAGE which shows COLLEGE LOGO #
 
             self.left=ImageTk.PhotoImage(file="images/1.png")
             left=Label(self.root,image=self.left).place(x=80,y=100,width=280,height=360)

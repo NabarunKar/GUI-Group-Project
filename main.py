@@ -37,7 +37,7 @@ class Register:
         txt_name = Entry(frame1, font=("verdana", 10),
                          bg="lightgray").place(x=150, y=50)
 
-        # ARCHISMAN'S PARENT'S NAME #
+        # PARENT'S NAME #
 
         fname = Label(frame1, text="FATHER'S NAME  ", font=(
             "verdana", 10, "bold"), bg="white", fg="black").place(x=10, y=70)

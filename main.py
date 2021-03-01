@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
+import openpyxl
 
 # ====== initialisation=========
 root = Tk()
@@ -9,8 +10,46 @@ root.title("Student Registration Form")
 root.geometry("1350x700+0+0")
 root.config(bg="teal")
 
+# filepath = "C:\Users\Mousumi\Documents\Python\GUI-Group-Project"
+
+Wb = openpyxl.Workbook()
+Wb.save('data.xlsx')
+sheet = Wb.active
 
 # ======== functions============
+
+
+def excel():
+    sheet.column_dimensions['A'].width = 30
+    sheet.column_dimensions['B'].width = 30
+    sheet.column_dimensions['C'].width = 30
+    sheet.column_dimensions['D'].width = 60
+    sheet.column_dimensions['E'].width = 20
+    sheet.column_dimensions['F'].width = 50
+    sheet.column_dimensions['H'].width = 50
+    sheet.column_dimensions['I'].width = 30
+    sheet.column_dimensions['J'].width = 30
+    sheet.column_dimensions['K'].width = 30
+    sheet.column_dimensions['L'].width = 30
+    sheet.column_dimensions['M'].width = 30
+    sheet.column_dimensions['N'].width = 30
+
+    sheet.cell(row=1, column=1).value = "Student Name"
+    sheet.cell(row=1, column=2).value = "Father's Name"
+    sheet.cell(row=1, column=3).value = "Mother Name"
+    sheet.cell(row=1, column=4).value = "Email"
+    sheet.cell(row=1, column=5).value = "Gender"
+    sheet.cell(row=1, column=6).value = "Contact Number"
+    sheet.cell(row=1, column=7).value = "Present Address"
+    sheet.cell(row=1, column=8).value = "Permanent Address"
+    sheet.cell(row=1, column=9).value = "X Marks"
+    sheet.cell(row=1, column=10).value = "XII Marks"
+    sheet.cell(row=1, column=11).value = "Board"
+    sheet.cell(row=1, column=12).value = "Physics Marks"
+    sheet.cell(row=1, column=13).value = "Chemistry Marks"
+    sheet.cell(row=1, column=14).value = "Maths Marks"
+
+
 def removeData():
     ck = chk_var.get()
     if(ck != 0):
@@ -34,12 +73,31 @@ def getData():
     if (chk == 0):
         messagebox.showerror('Error', 'Please check the checkbutton')
     else:
-        print('hello')
+        currentRow = sheet.max_row
+        currentColumn = sheet.max_column
+
+        sheet.cell(row=currentRow+1, column=1).value = studentName.get()
+        sheet.cell(row=currentRow+1, column=2).value = fatherName.get()
+        sheet.cell(row=currentRow+1, column=3).value = motherName.get()
+        sheet.cell(row=currentRow+1, column=4).value = email.get()
+        sheet.cell(row=currentRow+1, column=5).value = gender.get()
+        sheet.cell(row=currentRow+1, column=6).value = phoneNumber.get()
+        sheet.cell(row=currentRow+1, column=7).value = presentAddress.get()
+        sheet.cell(row=currentRow+1, column=8).value = permanentAddress.get()
+        sheet.cell(row=currentRow+1, column=9).value = tenMarks.get()
+        sheet.cell(row=currentRow+1, column=10).value = twelveMarks.get()
+        sheet.cell(row=currentRow+1, column=11).value = cmb_board.get()
+        sheet.cell(row=currentRow+1, column=12).value = phyMarks.get()
+        sheet.cell(row=currentRow+1, column=13).value = chemMarks.get()
+        sheet.cell(row=currentRow+1, column=14).value = mathMarks.get()
+
+        Wb.save('data.xlsx')
+        removeData()
 
 
 def show():
+    excel()
     getData()
-    removeData()
 
 
 # ==================== Declarations =========================
@@ -220,7 +278,7 @@ chem.place(x=150, y=230)
 
 math_label = Label(frame1, text="MARKS IN MATH", font=(
     "verdana", 10, "bold"), bg="white", fg="black")
-mail_label.place(x=10, y=250)
+math_label.place(x=10, y=250)
 
 math = Entry(frame1, font=("verdana", 10),
              bg="lightgray", textvariable=mathMarks)

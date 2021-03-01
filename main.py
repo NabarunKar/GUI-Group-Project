@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
 import openpyxl
+import math as M
 
 # ====== initialisation=========
 root = Tk()
@@ -26,6 +27,7 @@ def excel():
     sheet.column_dimensions['D'].width = 60
     sheet.column_dimensions['E'].width = 20
     sheet.column_dimensions['F'].width = 50
+    sheet.column_dimensions['G'].width = 50
     sheet.column_dimensions['H'].width = 50
     sheet.column_dimensions['I'].width = 30
     sheet.column_dimensions['J'].width = 30
@@ -33,6 +35,8 @@ def excel():
     sheet.column_dimensions['L'].width = 30
     sheet.column_dimensions['M'].width = 30
     sheet.column_dimensions['N'].width = 30
+    sheet.column_dimensions['O'].width = 30
+
 
     sheet.cell(row=1, column=1).value = "Student Name"
     sheet.cell(row=1, column=2).value = "Father's Name"
@@ -48,7 +52,7 @@ def excel():
     sheet.cell(row=1, column=12).value = "Physics Marks"
     sheet.cell(row=1, column=13).value = "Chemistry Marks"
     sheet.cell(row=1, column=14).value = "Maths Marks"
-
+    sheet.cell(row=1,column=15).value = "Percentage Marks"
 
 def removeData():
     ck = chk_var.get()
@@ -65,6 +69,7 @@ def removeData():
         phy.delete(0, END)
         chem.delete(0, END)
         math.delete(0, END)
+        cmb_board.delete(0,END)
 
 
 def getData():
@@ -90,6 +95,9 @@ def getData():
         sheet.cell(row=currentRow+1, column=12).value = phyMarks.get()
         sheet.cell(row=currentRow+1, column=13).value = chemMarks.get()
         sheet.cell(row=currentRow+1, column=14).value = mathMarks.get()
+        Percentage = round((int(phyMarks.get()) + int(chemMarks.get()) + int(mathMarks.get()))/3)
+        sheet.cell(row=currentRow+1, column=15).value = Percentage
+        
 
         Wb.save('data.xlsx')
         removeData()
@@ -251,13 +259,6 @@ cmb_board = ttk.Combobox(frame1, font=(
     "verdane", 10, "bold"), values=("ISC", "STATE BOARD", "CBSE", "OTHER"))
 cmb_board.place(x=150, y=190)
 
-other_board_label = Label(frame1, text="SPECIFY IF OTHER", font=(
-    "verdana", 10, "bold"), bg="white", fg="black")
-other_board_label.place(x=320, y=190)
-
-other_board = Entry(frame1, font=("verdana", 10),
-                    bg="lightgray", textvariable=otherBoard)
-other_board.place(x=500, y=190)
 
 # PCM MARKS #
 phy_label = Label(frame1, text="MARKS IN PHY", font=(

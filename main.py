@@ -72,11 +72,50 @@ def removeData():
         cmb_board.delete(0, END)
 
 
+
+        
+
+
 def getData():
     chk = chk_var.get()
+    lst = []
+    content = len(studentName.get())
+    lst.append(content)
+    content = len(fatherName.get())
+    lst.append(content)
+    content = len(motherName.get())
+    lst.append(content)
+    content = len(email.get())
+    lst.append(content)
+ #   content = len(gender.get())
+  #  lst.append(content)
+    content = len(phoneNumber.get())
+    lst.append(content)
+    content = len(presentAddress.get())
+    lst.append(content)
+    content = len(permanentAddress.get())
+    lst.append(content)
+    content = len(tenMarks.get())
+    lst.append(content)
+    content = len(twelveMarks.get())
+    lst.append(content)
+    content = len(cmb_board.get())
+    lst.append(content)
+    content = len(phyMarks.get())
+    lst.append(content)
+    content = len(chemMarks.get())
+    lst.append(content)
+    content = len(mathMarks.get())
+    lst.append(content)
+    #print(lst)
 
     if (chk == 0):
         messagebox.showerror('Error', 'Please check the checkbutton')
+
+    if (0 in lst):
+        messagebox.showerror('Error', 'Please fill all the fields')
+    
+
     else:
         currentRow = sheet.max_row
         #currentColumn = sheet.max_column

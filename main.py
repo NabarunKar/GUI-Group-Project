@@ -37,7 +37,6 @@ def excel():
     sheet.column_dimensions['N'].width = 30
     sheet.column_dimensions['O'].width = 30
 
-
     sheet.cell(row=1, column=1).value = "Student Name"
     sheet.cell(row=1, column=2).value = "Father's Name"
     sheet.cell(row=1, column=3).value = "Mother Name"
@@ -52,7 +51,8 @@ def excel():
     sheet.cell(row=1, column=12).value = "Physics Marks"
     sheet.cell(row=1, column=13).value = "Chemistry Marks"
     sheet.cell(row=1, column=14).value = "Maths Marks"
-    sheet.cell(row=1,column=15).value = "Percentage Marks"
+    sheet.cell(row=1, column=15).value = "Percentage Marks"
+
 
 def removeData():
     ck = chk_var.get()
@@ -69,7 +69,7 @@ def removeData():
         phy.delete(0, END)
         chem.delete(0, END)
         math.delete(0, END)
-        cmb_board.delete(0,END)
+        cmb_board.delete(0, END)
 
 
 def getData():
@@ -79,20 +79,19 @@ def getData():
         messagebox.showerror('Error', 'Please check the checkbutton')
     else:
         currentRow = sheet.max_row
-        currentColumn = sheet.max_column
+        #currentColumn = sheet.max_column
 
         sheet.cell(row=currentRow+1, column=1).value = studentName.get()
         sheet.cell(row=currentRow+1, column=2).value = fatherName.get()
         sheet.cell(row=currentRow+1, column=3).value = motherName.get()
         sheet.cell(row=currentRow+1, column=4).value = email.get()
         Gender_res = gender.get()
-        if Gender_res==1:
+        if Gender_res == 1:
             sheet.cell(row=currentRow+1, column=5).value = "Male"
-        elif Gender_res==2:
+        elif Gender_res == 2:
             sheet.cell(row=currentRow+1, column=5).value = "Female"
         else:
             sheet.cell(row=currentRow+1, column=5).value = "Other"
-
 
         #sheet.cell(row=currentRow+1, column=5).value = gender.get()
         sheet.cell(row=currentRow+1, column=6).value = phoneNumber.get()
@@ -104,9 +103,9 @@ def getData():
         sheet.cell(row=currentRow+1, column=12).value = phyMarks.get()
         sheet.cell(row=currentRow+1, column=13).value = chemMarks.get()
         sheet.cell(row=currentRow+1, column=14).value = mathMarks.get()
-        Percentage = round((int(phyMarks.get()) + int(chemMarks.get()) + int(mathMarks.get()))/3)
+        Percentage = round(
+            (int(phyMarks.get()) + int(chemMarks.get()) + int(mathMarks.get()))/3)
         sheet.cell(row=currentRow+1, column=15).value = Percentage
-        
 
         Wb.save('data.xlsx')
         removeData()
@@ -137,13 +136,13 @@ chk_var = IntVar()
 # ======================== Form ==============================
 
 # BG IMAGE #
-bg_image = Image.open("images\stcet.png")
+bg_image = Image.open(r"images\stcet.png")
 bg = ImageTk.PhotoImage(bg_image)
 bg_label = Label(image=bg)
 bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 #COLLEGE LOGO #
-logo_image = Image.open("images\logo.png")
+logo_image = Image.open(r"images\logo.png")
 logo = ImageTk.PhotoImage(logo_image)
 logo_label = Label(image=logo)
 logo_label.place(x=80, y=100, width=280, height=380)
@@ -192,7 +191,7 @@ mail_label = Label(frame1, text="EMAIL ID  ", font=(
 mail_label.place(x=10, y=90)
 
 mail = Entry(frame1, font=("verdana", 10),
-             bg="lightgray", textvariable=email)
+             bg="lightgray", textvariable=email, width=30)
 mail.place(x=150, y=90)
 
 
@@ -303,6 +302,10 @@ chk_1.place(x=10, y=280)
 # SUBMIT BUTTON
 Button(frame1, font=("verdana", 12), text="Submit",
        command=show).place(x=260, y=340)
+
+# RESET BUTTON
+Button(frame1, font=("verdana", 12), text="Reset",
+       command=removeData).place(x=360, y=340)
 
 
 root.mainloop()

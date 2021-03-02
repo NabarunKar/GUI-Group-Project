@@ -85,7 +85,16 @@ def getData():
         sheet.cell(row=currentRow+1, column=2).value = fatherName.get()
         sheet.cell(row=currentRow+1, column=3).value = motherName.get()
         sheet.cell(row=currentRow+1, column=4).value = email.get()
-        sheet.cell(row=currentRow+1, column=5).value = gender.get()
+        Gender_res = gender.get()
+        if Gender_res==1:
+            sheet.cell(row=currentRow+1, column=5).value = "Male"
+        elif Gender_res==2:
+            sheet.cell(row=currentRow+1, column=5).value = "Female"
+        else:
+            sheet.cell(row=currentRow+1, column=5).value = "Other"
+
+
+        #sheet.cell(row=currentRow+1, column=5).value = gender.get()
         sheet.cell(row=currentRow+1, column=6).value = phoneNumber.get()
         sheet.cell(row=currentRow+1, column=7).value = presentAddress.get()
         sheet.cell(row=currentRow+1, column=8).value = permanentAddress.get()
@@ -113,16 +122,16 @@ studentName = StringVar()
 fatherName = StringVar()
 motherName = StringVar()
 email = StringVar()
-gender = StringVar()
-phoneNumber = IntVar()
+gender = IntVar()
+phoneNumber = StringVar()
 presentAddress = StringVar()
 permanentAddress = StringVar()
-tenMarks = IntVar()
-twelveMarks = IntVar()
+tenMarks = StringVar()
+twelveMarks = StringVar()
 otherBoard = StringVar()
-phyMarks = IntVar()
-chemMarks = IntVar()
-mathMarks = IntVar()
+phyMarks = StringVar()
+chemMarks = StringVar()
+mathMarks = StringVar()
 chk_var = IntVar()
 
 # ======================== Form ==============================
@@ -193,14 +202,14 @@ sex_label = Label(frame1, text="SEX  ", font=(
 sex_label.place(x=10, y=110)
 
 # RADIOBUTTON
-Radiobutton(frame1, text="MALE", value="male",
-            variable=gender).place(x="150", y="110")
+Radiobutton(frame1, text="MALE", value=1,
+            variable=gender).place(x=150, y=110)
 
-Radiobutton(frame1, text="FEMALE", value="female",
-            variable=gender).place(x="230", y="110")
+Radiobutton(frame1, text="FEMALE", value=2,
+            variable=gender).place(x=230, y=110)
 
-Radiobutton(frame1, text="OTHER", value="other",
-            variable=gender).place(x="310", y="110")
+Radiobutton(frame1, text="OTHER", value=3,
+            variable=gender).place(x=310, y=110)
 
 
 # CONTACT NUMBER #

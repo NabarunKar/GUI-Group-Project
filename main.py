@@ -112,7 +112,7 @@ def getData():
     if (chk == 0):
         messagebox.showerror('Error', 'Please check the checkbutton')
 
-    if (0 in lst):
+    if (0 in lst or gender.get()!=1 or gender.get()!=2 or gender.get()!=3):
         messagebox.showerror('Error', 'Please fill all the fields')
     
 

@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
 import openpyxl
-import math as M
+
 
 # ====== initialisation=========
 root = Tk()
@@ -11,7 +11,6 @@ root.title("Student Registration Form")
 root.geometry("1350x700+0+0")
 root.config(bg="teal")
 
-# filepath = "C:\Users\Mousumi\Documents\Python\GUI-Group-Project"
 
 Wb = openpyxl.Workbook()
 Wb.save('data.xlsx')
@@ -87,8 +86,8 @@ def getData():
     lst.append(content)
     content = len(email.get())
     lst.append(content)
- #   content = len(gender.get())
-  #  lst.append(content)
+    content = gender.get()
+    lst.append(content)
     content = len(phoneNumber.get())
     lst.append(content)
     content = len(presentAddress.get())
@@ -112,7 +111,7 @@ def getData():
     if (chk == 0):
         messagebox.showerror('Error', 'Please check the checkbutton')
 
-    if (0 in lst or gender.get()!=1 or gender.get()!=2 or gender.get()!=3):
+    if (0 in lst ):
         messagebox.showerror('Error', 'Please fill all the fields')
     
 
@@ -125,6 +124,7 @@ def getData():
         sheet.cell(row=currentRow+1, column=3).value = motherName.get()
         sheet.cell(row=currentRow+1, column=4).value = email.get()
         Gender_res = gender.get()
+        
         if Gender_res == 1:
             sheet.cell(row=currentRow+1, column=5).value = "Male"
         elif Gender_res == 2:

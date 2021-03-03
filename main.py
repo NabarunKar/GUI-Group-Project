@@ -1,8 +1,16 @@
+# imports
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+
 from PIL import Image, ImageTk
+
 import openpyxl
+from openpyxl import *
+from openpyxl.styles import Font, Color
+
+import os.path
+from os import path
 
 
 # ====== initialisation=========
@@ -12,8 +20,12 @@ root.geometry("1350x700+0+0")
 root.config(bg="teal")
 
 
-Wb = openpyxl.Workbook()
-Wb.save('data.xlsx')
+if path.exists('data.xlsx'):
+    Wb = load_workbook('data.xlsx')
+else:
+    Wb = openpyxl.Workbook()
+    Wb.save('data.xlsx')
+
 sheet = Wb.active
 
 # ======== functions============
@@ -52,6 +64,38 @@ def excel():
     sheet.cell(row=1, column=14).value = "Maths Marks"
     sheet.cell(row=1, column=15).value = "Percentage Marks"
 
+    a1 = sheet['A1']
+    b1 = sheet['B1']
+    c1 = sheet['C1']
+    d1 = sheet['D1']
+    e1 = sheet['E1']
+    f1 = sheet['F1']
+    g1 = sheet['G1']
+    h1 = sheet['H1']
+    i1 = sheet['I1']
+    j1 = sheet['J1']
+    k1 = sheet['K1']
+    l1 = sheet['L1']
+    m1 = sheet['M1']
+    n1 = sheet['N1']
+    o1 = sheet['O1']
+
+    a1.font = Font(bold=True)
+    b1.font = Font(bold=True)
+    c1.font = Font(bold=True)
+    d1.font = Font(bold=True)
+    e1.font = Font(bold=True)
+    f1.font = Font(bold=True)
+    g1.font = Font(bold=True)
+    h1.font = Font(bold=True)
+    i1.font = Font(bold=True)
+    j1.font = Font(bold=True)
+    k1.font = Font(bold=True)
+    l1.font = Font(bold=True)
+    m1.font = Font(bold=True)
+    n1.font = Font(bold=True)
+    o1.font = Font(bold=True)
+
 
 def removeData():
     ck = chk_var.get()
@@ -69,10 +113,7 @@ def removeData():
         chem.delete(0, END)
         math.delete(0, END)
         cmb_board.delete(0, END)
-
-
-
-        
+        gender.set(None)
 
 
 def getData():
@@ -106,14 +147,13 @@ def getData():
     lst.append(content)
     content = len(mathMarks.get())
     lst.append(content)
-    #print(lst)
+    # print(lst)
 
     if (chk == 0):
         messagebox.showerror('Error', 'Please check the checkbutton')
 
-    if (0 in lst ):
+    if (0 in lst):
         messagebox.showerror('Error', 'Please fill all the fields')
-    
 
     else:
         currentRow = sheet.max_row
@@ -124,7 +164,7 @@ def getData():
         sheet.cell(row=currentRow+1, column=3).value = motherName.get()
         sheet.cell(row=currentRow+1, column=4).value = email.get()
         Gender_res = gender.get()
-        
+
         if Gender_res == 1:
             sheet.cell(row=currentRow+1, column=5).value = "Male"
         elif Gender_res == 2:
@@ -147,6 +187,7 @@ def getData():
         sheet.cell(row=currentRow+1, column=15).value = Percentage
 
         Wb.save('data.xlsx')
+        Wb.close()
         removeData()
 
 
@@ -339,11 +380,11 @@ chk_1 = Checkbutton(frame1,
 chk_1.place(x=10, y=380)
 
 # SUBMIT BUTTON
-Button(frame1, font=("verdana", 12), text="Submit",bg="#15A01F", activebackground = "#75F87E",
+Button(frame1, font=("verdana", 12), text="Submit", bg="#15A01F", activebackground="#75F87E",
        command=show).place(x=260, y=440)
 
 # RESET BUTTON
-Button(frame1, font=("verdana", 12), text="Reset",bg="#D74627", activebackground = "#F96259",
+Button(frame1, font=("verdana", 12), text="Reset", bg="#D74627", activebackground="#F96259",
        command=removeData).place(x=360, y=440)
 
 
